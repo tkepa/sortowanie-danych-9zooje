@@ -22,8 +22,8 @@ export class TableUI {
   createTableHeader(columns) {
     const tableHeader = document.createElement("thead");
 
-    columns.forEach(columnName =>
-      tableHeader.appendChild(this.createColumnHeader(columnName))
+    columns.forEach(({ name, onClick }) =>
+      tableHeader.appendChild(this.createColumnHeader(name, onClick))
     );
 
     return tableHeader;
@@ -39,12 +39,12 @@ export class TableUI {
     return tableBody;
   }
 
-  createColumnHeader(header) {
+  createColumnHeader(header, onClick) {
     const columnHeader = document.createElement("th");
 
     columnHeader.setAttribute("class", this.headerClass);
     columnHeader.innerHTML = header;
-
+    if (onClick) this.addEventListener(columnHeader, onClick);
     return columnHeader;
   }
 
@@ -65,5 +65,9 @@ export class TableUI {
     dataCell.textContent = text;
 
     return dataCell;
+  }
+
+  addEventListener(element, onClick) {
+    element.addEventListener("click", e => onClick());
   }
 }

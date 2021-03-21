@@ -1,7 +1,20 @@
 import { TableUI } from "./assets/tableUI.js";
 
 const tableData = {
-  columns: ["Moduł", "Autor", "Czas trwania"],
+  headers: [
+    {
+      name: "Moduł",    
+    }, 
+    {
+      name: "Autor",
+    },
+    {
+      name: "Czas trwania",
+      onClick() {
+        
+      }
+    }
+  ],
   rows: {
     0: ["Fundamenty języka JavaScript", "Adam", "10129"],
     1: ["Przeglądarka bez tajemnic", "Przemek", "19393"],
