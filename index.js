@@ -3,16 +3,14 @@ import { TableUI } from "./assets/tableUI.js";
 const tableData = {
   headers: [
     {
-      name: "Moduł",    
-    }, 
+      name: "Moduł"
+    },
     {
-      name: "Autor",
+      name: "Autor"
     },
     {
       name: "Czas trwania",
-      onClick() {
-        
-      }
+      sort: true
     }
   ],
   rows: {
@@ -27,3 +25,5 @@ const container = document.querySelector("body");
 const table = new TableUI(container);
 
 container.appendChild(table.createTable(tableData));
+
+table.sortByColumn(2)

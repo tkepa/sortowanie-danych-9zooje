@@ -1,6 +1,7 @@
 export class TableUI {
   constructor(container) {
     this.container = container;
+    this.tbody = null;
     this.tableClass =
       "table-auto bg-white rounded-md overflow-hidden shadow-xl";
     this.cellClass = "border px-4 py-2";
@@ -35,7 +36,7 @@ export class TableUI {
     Object.values(rowsData).forEach((rowData, index) =>
       tableBody.appendChild(this.createRow(rowData, index))
     );
-
+    this.tbody = tableBody;
     return tableBody;
   }
 
@@ -67,7 +68,19 @@ export class TableUI {
     return dataCell;
   }
 
-  addEventListener(element, onClick) {
-    element.addEventListener("click", e => onClick());
+  sortByColumn(index) {
+    const rows = [...this.tbody.rows];
+    const orderedRows = rows.sort(
+      (row1, row2) =>
+        +[...row2.cells][index]?.textContent -
+        +[...row1.cells][index]?.textContent
+    );
+
+    this.generateOrderedTbody(orderedRows);
+  }
+
+  generateOrderedTbody(...rows) {
+    this.tbody.innerHTML = "";
+    rows.forEach(row => (this.tbody.innerHTML += row));
   }
 }
